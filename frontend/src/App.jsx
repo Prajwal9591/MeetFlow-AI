@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+<<<<<<< HEAD
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import Dashboard from './pages/Dashboard'
 import MeetingRoom from './pages/MeetingRoom'
@@ -9,6 +10,12 @@ import Settings from './pages/Settings'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
 import ProtectedRoute from './components/ProtectedRoute'
+=======
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import Dashboard from './pages/Dashboard'
+import MeetingRoom from './pages/MeetingRoom'
+import Lobby from './pages/Lobby'
+>>>>>>> upstream/main
 import Sidebar from './components/Sidebar'
 
 function App() {
@@ -24,6 +31,7 @@ function App() {
 
   return (
     <Router>
+<<<<<<< HEAD
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
@@ -62,6 +70,19 @@ function App() {
           </div>
         } />
       </Routes>
+=======
+      <div className="flex h-screen overflow-hidden bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100">
+        <Sidebar darkMode={darkMode} setDarkMode={setDarkMode} />
+        
+        <main className="flex-1 overflow-y-auto">
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/lobby/:id" element={<Lobby />} />
+            <Route path="/meeting/:id" element={<MeetingRoom />} />
+          </Routes>
+        </main>
+      </div>
+>>>>>>> upstream/main
     </Router>
   )
 }

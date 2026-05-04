@@ -46,6 +46,7 @@ const VideoPlayer = ({ stream, isLocal, name }) => {
     );
 };
 
+<<<<<<< HEAD
 function extractName(text, usersList, currentUser) {
     const lower = text.toLowerCase();
     
@@ -84,6 +85,8 @@ function detectAction(text, usersList, currentUser) {
     return null;
 }
 
+=======
+>>>>>>> upstream/main
 const MeetingRoom = () => {
     const { id: meetingId } = useParams();
     const navigate = useNavigate();
@@ -95,13 +98,17 @@ const MeetingRoom = () => {
     const secretKey = urlParams.get('key');
     const initMic = urlParams.get('mic') === 'true';
     const initCam = urlParams.get('cam') === 'true';
+<<<<<<< HEAD
     const [isMicOn, setIsMicOn] = useState(initMic);
+=======
+>>>>>>> upstream/main
 
     const [userName] = useState('Speaker_' + Math.floor(Math.random() * 99));
     const [meetingTitle, setMeetingTitle] = useState('Nexus Session');
     const [activeSidebar, setActiveSidebar] = useState('participants'); // 'participants', 'transcripts', 'tasks'
     const [error, setError] = useState('');
 
+<<<<<<< HEAD
     // --- New Username State ---
     const [currentUser, setCurrentUser] = useState('');
     const [isJoined, setIsJoined] = useState(false);
@@ -184,6 +191,8 @@ const MeetingRoom = () => {
         };
     }, [socket, currentUser]);
 
+=======
+>>>>>>> upstream/main
     // --- WEBRTC Logic ---
     const { peers, localStream, initLocalCamera } = useWebRTC(socket, meetingId, secretKey);
 
@@ -229,6 +238,7 @@ const MeetingRoom = () => {
 
     }, [meetingId, secretKey, socket]); // Simplified dependencies to avoid loops
 
+<<<<<<< HEAD
     useEffect(() => {
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         
@@ -357,6 +367,8 @@ const MeetingRoom = () => {
         }
     }, [isMicOn]);
 
+=======
+>>>>>>> upstream/main
     if (isInitializing) {
         return (
             <div className="h-screen flex flex-col items-center justify-center bg-slate-950">
@@ -384,6 +396,7 @@ const MeetingRoom = () => {
     return (
         <div className="h-screen flex flex-col bg-slate-950 text-slate-100 overflow-hidden font-sans">
             
+<<<<<<< HEAD
             {/* --- Username Modal Overlay --- */}
             {!isJoined && (
                 <div className="absolute inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm">
@@ -424,6 +437,8 @@ const MeetingRoom = () => {
                 </div>
             )}
 
+=======
+>>>>>>> upstream/main
             {/* 🖥️ Top Navigation Bar */}
             <header className="h-20 border-b border-white/5 flex items-center justify-between px-10 bg-slate-900/40 backdrop-blur-3xl z-40">
                 <div className="flex items-center space-x-8">
@@ -465,11 +480,19 @@ const MeetingRoom = () => {
                 <main className="flex-1 p-8 overflow-y-auto content-center grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-[1700px] mx-auto w-full">
                     
                     {/* Local Participant */}
+<<<<<<< HEAD
                     <VideoPlayer stream={localStream} isLocal={true} name={`${currentUser || userName} (You)`} />
 
                     {/* Remote Participants (Full Mesh) */}
                     {peers.map((peer) => (
                         <VideoPlayer key={peer.peerId} stream={peer.stream} isLocal={false} name={users[peer.peerId] ? users[peer.peerId] : "Guest"} />
+=======
+                    <VideoPlayer stream={localStream} isLocal={true} name={`${userName} (You)`} />
+
+                    {/* Remote Participants (Full Mesh) */}
+                    {peers.map((peer) => (
+                        <VideoPlayer key={peer.peerId} stream={peer.stream} isLocal={false} name={peer.userName || `Remote Participant`} />
+>>>>>>> upstream/main
                     ))}
 
                     {/* Alone State Card */}
@@ -516,23 +539,33 @@ const MeetingRoom = () => {
                                     <div className="flex items-center p-4 bg-brand-500/10 rounded-2xl border border-brand-500/20">
                                         <div className="w-12 h-12 bg-brand-500 rounded-2xl flex items-center justify-center font-bold mr-4">You</div>
                                         <div className="flex-1">
+<<<<<<< HEAD
                                             <p className="text-sm font-bold">{currentUser || userName}</p>
                                             <p className="text-[10px] text-brand-400 font-bold uppercase tracking-tight">{isHost ? "Meeting Host" : "Participant"}</p>
+=======
+                                            <p className="text-sm font-bold">{userName}</p>
+                                            <p className="text-[10px] text-brand-400 font-bold uppercase tracking-tight">Meeting Host</p>
+>>>>>>> upstream/main
                                         </div>
                                     </div>
                                     {peers.map(p => (
                                         <div key={p.peerId} className="flex items-center p-4 bg-white/5 rounded-2xl border border-white/5">
                                             <div className="w-12 h-12 bg-slate-800 rounded-2xl flex items-center justify-center font-bold mr-4">GU</div>
+<<<<<<< HEAD
                                             <div className="flex-1">
                                                 <p className="text-sm font-bold">{users[p.peerId] ? users[p.peerId] : "Guest"}</p>
                                                 <p className="text-[10px] text-slate-400 font-bold uppercase tracking-tight">{users[p.peerId] === hostName ? "Meeting Host" : "Participant"}</p>
                                             </div>
+=======
+                                            <p className="text-sm font-bold">Guest_{p.peerId.substring(0,4)}</p>
+>>>>>>> upstream/main
                                         </div>
                                     ))}
                                 </motion.div>
                             )}
                             
                             {activeSidebar === 'transcripts' && (
+<<<<<<< HEAD
                                 <motion.div key="t-tab" initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -10 }}  className="text-left py-4 text-slate-300">
                                     <p className="text-sm italic mb-4 text-slate-500">AI Transcription is active and listening...</p>
                                     <div className="space-y-4">
@@ -544,10 +577,15 @@ const MeetingRoom = () => {
                                             ))
                                         )}
                                     </div>
+=======
+                                <motion.div key="t-tab" initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -10 }}  className="text-center py-20 text-slate-500">
+                                    <p className="text-sm italic">AI Transcription is active and listening...</p>
+>>>>>>> upstream/main
                                 </motion.div>
                             )}
 
                             {activeSidebar === 'tasks' && (
+<<<<<<< HEAD
                                 <motion.div key="k-tab" initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -10 }}  className="text-left py-4 text-slate-300">
                                     <p className="text-sm italic mb-4 text-slate-500">Capture action items automatically with GPT Monitoring.</p>
                                     <div className="space-y-4">
@@ -563,12 +601,20 @@ const MeetingRoom = () => {
                                             ))
                                         )}
                                     </div>
+=======
+                                <motion.div key="k-tab" initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -10 }}  className="text-center py-20 text-slate-500">
+                                    <p className="text-sm italic">Capture action items automatically with GPT Monitoring.</p>
+>>>>>>> upstream/main
                                 </motion.div>
                             )}
 
                             {activeSidebar === 'chat' && (
                                 <motion.div key="c-tab" initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -10 }} className="h-full min-h-[400px]">
+<<<<<<< HEAD
                                     <GroupChat roomId={meetingId} userName={currentUser || userName} localStream={localStream} />
+=======
+                                    <GroupChat roomId={meetingId} userName={userName} localStream={localStream} />
+>>>>>>> upstream/main
                                 </motion.div>
                             )}
                         </AnimatePresence>
@@ -579,8 +625,13 @@ const MeetingRoom = () => {
             {/* 🕹️ Floating Command Toolbar */}
             <footer className="h-32 flex items-center justify-center translate-y-0 z-50">
                 <div className="bg-slate-900/60 backdrop-blur-3xl px-12 py-5 rounded-[2.5rem] border border-white/10 flex items-center space-x-8 shadow-4xl shadow-black/50">
+<<<<<<< HEAD
                     <button onClick={() => setIsMicOn(prev => !prev)} className={`w-14 h-14 rounded-2xl ${isMicOn ? 'bg-slate-800 hover:bg-slate-700 text-brand-500' : 'bg-red-500/20 hover:bg-red-500/30 text-red-500'} flex items-center justify-center transition-all group`}>
                         <Mic className="w-6 h-6 transition-colors" />
+=======
+                    <button className="w-14 h-14 rounded-2xl bg-slate-800 hover:bg-slate-700 flex items-center justify-center transition-all group">
+                        <Mic className="w-6 h-6 text-slate-400 group-hover:text-brand-500 transition-colors" />
+>>>>>>> upstream/main
                     </button>
                     <button className="w-14 h-14 rounded-2xl bg-slate-800 hover:bg-slate-700 flex items-center justify-center transition-all group">
                         <VidIcon className="w-6 h-6 text-slate-400 group-hover:text-brand-500 transition-colors" />
@@ -597,10 +648,14 @@ const MeetingRoom = () => {
                     
                     <div className="w-px h-10 bg-white/10 mx-2" />
                     
+<<<<<<< HEAD
                     <button className="w-14 h-14 rounded-2xl bg-red-500 hover:bg-red-600 flex items-center justify-center transition-all shadow-xl shadow-red-500/20" onClick={() => {
                         localStorage.removeItem("activeMeeting");
                         navigate('/');
                     }}>
+=======
+                    <button className="w-14 h-14 rounded-2xl bg-red-500 hover:bg-red-600 flex items-center justify-center transition-all shadow-xl shadow-red-500/20" onClick={() => navigate('/')}>
+>>>>>>> upstream/main
                         <CalendarX className="w-6 h-6" />
                     </button>
                 </div>

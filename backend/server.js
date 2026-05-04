@@ -164,6 +164,7 @@ app.post('/api/ai/audio-query', upload.single('audio'), async (req, res) => {
 });
 
 /* ============================ WEBRTC SIGNALING ============================ */
+<<<<<<< HEAD
 function extractName(text) {
   const parts = text.split(" by ");
   return parts.length > 1 ? parts[1].split(" ")[0] : "Unassigned";
@@ -195,11 +196,16 @@ const rooms = {};
 const userMap = {}; // socket.id -> username
 const nameToSocket = {}; // username -> socket.id
 
+=======
+const rooms = {};
+
+>>>>>>> upstream/main
 io.on("connection", (socket) => {
   const userAgent = socket.handshake.headers['user-agent'] || 'Unknown Device';
   const deviceType = /Mobi|Android/i.test(userAgent) ? 'Mobile' : 'Desktop';
   console.log(`⚡ User connected: ${socket.id} | Device: ${deviceType} (${userAgent})`);
 
+<<<<<<< HEAD
     // --- New Event: join-meeting-user ---
   socket.on("join-meeting-user", ({ meetingId, username }) => {
     userMap[socket.id] = username;
@@ -239,6 +245,8 @@ io.on("connection", (socket) => {
     }
   });
 
+=======
+>>>>>>> upstream/main
   socket.on("join-room", async ({ roomId, userName, secretKey }) => {
     // 1. Strict Validation
     let meeting = meetingsStore[roomId];
@@ -306,6 +314,7 @@ io.on("connection", (socket) => {
   /* === TRANSCRIPTIONS === */
   socket.on("send-transcript", async (data) => {
     try {
+<<<<<<< HEAD
       console.log("Transcript sent:", data);
       
       if (mongoose.connection.readyState === 1) {
@@ -335,6 +344,12 @@ io.on("connection", (socket) => {
         io.to(data.meetingId).emit("receive-action", newAction);
       }
 
+=======
+      if (mongoose.connection.readyState === 1) {
+        await new Transcript({ meetingId: data.meetingId, speaker: data.speaker, text: data.text }).save();
+      }
+      socket.to(data.meetingId).emit("receive-transcript", data);
+>>>>>>> upstream/main
       const tasks = extractActionItems(data.text);
       if (tasks) {
         for (const task of tasks) {
@@ -455,6 +470,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("disconnect", () => {
+<<<<<<< HEAD
     // --- Remove user from mappings ---
     const username = userMap[socket.id];
     if (username) {
@@ -464,6 +480,8 @@ io.on("connection", (socket) => {
 
     io.emit("user-left", socket.id);
 
+=======
+>>>>>>> upstream/main
     const roomId = socket.roomId;
     if (roomId) {
       // 1. Clean up rooms list

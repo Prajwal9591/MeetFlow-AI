@@ -19,11 +19,16 @@ const useSpeechRecognition = () => {
 
         const recog = new SpeechRecognition();
         recog.continuous = true;
+<<<<<<< HEAD
         recog.interimResults = false;
+=======
+        recog.interimResults = true;
+>>>>>>> upstream/main
         recog.lang = 'en-US';
 
         let finalTranscript = '';
 
+<<<<<<< HEAD
         let lastTranscript = '';
         recog.onresult = (event) => {
             for (let i = event.resultIndex; i < event.results.length; i++) {
@@ -35,6 +40,19 @@ const useSpeechRecognition = () => {
                     }
                 }
             }
+=======
+        recog.onresult = (event) => {
+            let interimTranscript = '';
+            for (let i = event.resultIndex; i < event.results.length; i++) {
+                const tr = event.results[i][0].transcript;
+                if (event.results[i].isFinal) {
+                    finalTranscript += tr + ' ';
+                } else {
+                    interimTranscript += tr;
+                }
+            }
+            setTranscript(finalTranscript + interimTranscript);
+>>>>>>> upstream/main
         };
 
         recog.onerror = (event) => {

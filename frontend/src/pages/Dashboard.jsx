@@ -13,6 +13,7 @@ const Dashboard = () => {
   const [joinSecretKey, setJoinSecretKey] = useState('');
   const [joinError, setJoinError] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
+<<<<<<< HEAD
   const activeMeeting = JSON.parse(localStorage.getItem("activeMeeting"));
 
   useEffect(() => {
@@ -24,6 +25,8 @@ const Dashboard = () => {
       navigate(`/meeting/${activeMeeting.meetingId}?key=${activeMeeting.key}&mic=true&cam=true`);
     }
   }, []);
+=======
+>>>>>>> upstream/main
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_BACKEND_URL || ''}/api/meetings`)
@@ -112,6 +115,7 @@ const Dashboard = () => {
                 <span>Join Meeting</span>
             </motion.button>
         </div>
+<<<<<<< HEAD
         {activeMeeting && (
           <button
             onClick={() => navigate(`/meeting/${activeMeeting.meetingId}?key=${activeMeeting.key}&mic=true&cam=true`)}
@@ -136,6 +140,8 @@ const Dashboard = () => {
                 Logout
             </button>
         </div>
+=======
+>>>>>>> upstream/main
       </header>
 
       {/* 📋 RECENT SESSIONS */}
